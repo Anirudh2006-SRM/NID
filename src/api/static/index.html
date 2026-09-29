@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sentinel-NIDS | Hybrid Intrusion Detection & Zero-Day Threat Center</title>
+  <meta name="description" content="Research-Grade Hybrid Network Intrusion Detection System combining Random Forest Supervised Classifier and Isolation Forest with SHAP Explainability." />
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body class="theme-light">
+  <!-- Subtle Light Ambient Background Gradients -->
+  <div class="light-mesh-bg"></div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar glass">
+    <div class="nav-brand">
+      <div class="shield-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shield-icon">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <div class="brand-title">SENTINEL<span>.HYBRID</span></div>
+        <div class="brand-subtitle">Network Intrusion Detection & Zero-Day Defense</div>
+      </div>
+    </div>
+
+    <!-- Center SOC Telemetry Badges -->
+    <div class="nav-center">
+      <div class="status-pill status-online">
+        <span class="status-dot"></span>
+        <span class="status-label">DUAL-ENGINE: ACTIVE</span>
+      </div>
+      <div class="status-pill threat-pill" id="global-threat-pill">
+        <span class="threat-dot"></span>
+        <span id="threat-level-text">DEFCON 5: NORMAL</span>
+      </div>
+    </div>
+
+    <!-- Right Controls -->
+    <div class="nav-actions">
+      <button id="toggle-stream-btn" class="btn btn-secondary stream-btn">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        <span id="stream-btn-label">Pause Stream</span>
+      </button>
+
+      <a href="https://github.com/Anirudh2006-SRM/NID" target="_blank" rel="noopener noreferrer" class="btn btn-outline github-btn" title="View Source on GitHub">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        <span>GitHub</span>
+      </a>
+
+      <a href="/docs" target="_blank" class="btn btn-outline" title="FastAPI Interactive Swagger Docs">
+        API Docs
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="dashboard-container">
+    
+    <!-- Top Telemetry Row -->
+    <section class="telemetry-bar grid-5">
+      <div class="card stat-card glass">
+        <div class="stat-header">
+          <span class="stat-title">Flows Evaluated</span>
+          <span class="stat-icon-wrap icon-blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </span>
+        </div>
+        <div class="stat-val font-mono" id="stat-total-flows">1,248</div>
+        <div class="stat-meta text-success font-medium">● Live Pipeline Active</div>
+      </div>
+
+      <div class="card stat-card glass">
+        <div class="stat-header">
+          <span class="stat-title">Known Attacks Blocked</span>
+          <span class="stat-icon-wrap icon-red">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          </span>
+        </div>
+        <div class="stat-val font-mono text-danger" id="stat-known-attacks">412</div>
+        <div class="stat-meta">Multiclass RF Precision: <strong>98.4%</strong></div>
+      </div>
+
+      <div class="card stat-card glass">
+        <div class="stat-header">
+          <span class="stat-title">Unseen Threats Flagged</span>
+          <span class="stat-icon-wrap icon-purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </span>
+        </div>
+        <div class="stat-val font-mono text-purple" id="stat-unseen-threats">64</div>
+        <div class="stat-meta text-purple">Zero-Day Anomaly Detection</div>
+      </div>
+
+      <div class="card stat-card glass">
+        <div class="stat-header">
+          <span class="stat-title">Anomaly Boundary</span>
+          <span class="stat-icon-wrap icon-amber">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </span>
+        </div>
+        <div class="stat-val font-mono" id="stat-anomaly-threshold">0.4782</div>
+        <div class="stat-meta">Isolation Forest P90 Cutoff</div>
+      </div>
+
+      <div class="card stat-card glass">
+        <div class="stat-header">
+          <span class="stat-title">Inference Latency</span>
+          <span class="stat-icon-wrap icon-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </span>
+        </div>
+        <div class="stat-val font-mono text-success" id="stat-inference-latency">1.82 ms</div>
+        <div class="stat-meta">Sub-millisecond Preprocessing</div>
+      </div>
+    </section>
+
+    <!-- Main Grid: 3 Columns -->
+    <div class="main-soc-grid">
+      
+      <!-- LEFT COLUMN: Live Telemetry Stream -->
+      <section class="card glass stream-panel">
+        <div class="card-header">
+          <div class="header-left">
+            <span class="radar-dot"></span>
+            <h3>Live Telemetry Stream</h3>
+          </div>
+          <div class="stream-badge font-mono" id="stream-rate-badge">8 pkts/sec</div>
+        </div>
+
+        <div class="stream-filters">
+          <button class="filter-chip active" data-filter="ALL">ALL</button>
+          <button class="filter-chip chip-normal" data-filter="NORMAL">NORMAL</button>
+          <button class="filter-chip chip-attack" data-filter="KNOWN ATTACK">ATTACK</button>
+          <button class="filter-chip chip-unseen" data-filter="UNSEEN / ANOMALOUS">UNSEEN</button>
+        </div>
+
+        <div class="stream-table-header font-mono">
+          <span>TIME</span>
+          <span>PROTO / SVC</span>
+          <span>RATE & BYTES</span>
+          <span>ANOMALY</span>
+          <span>DECISION</span>
+        </div>
+
+        <div class="stream-list font-mono" id="stream-list">
+          <!-- Dynamically populated rows -->
+        </div>
+
+        <div class="stream-footer">
+          <span class="text-muted">Click row to load into inspector</span>
+          <button id="clear-stream-btn" class="btn-text">Clear Log</button>
+        </div>
+      </section>
+
+      <!-- CENTER COLUMN: Flow Inspector & Evaluation Sandbox -->
+      <section class="card glass inspector-panel">
+        <div class="card-header">
+          <div class="header-left">
+            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <h3>Flow Inspector & Attack Sandbox</h3>
+          </div>
+          <span class="badge badge-blue">Live Model Inference</span>
+        </div>
+
+        <!-- Preset Selection Bar -->
+        <div class="preset-section">
+          <label class="section-label">Select Traffic Profile Preset:</label>
+          <div class="preset-chips" id="preset-container">
+            <!-- Populated via API -->
+          </div>
+          <p class="preset-desc font-mono" id="preset-description">Select a preset to load network flow features into the sandbox.</p>
+        </div>
+
+        <!-- Editable Feature Fields Grid -->
+        <form id="flow-form" class="flow-form-grid">
+          <div class="form-group">
+            <label for="f-proto">Protocol (proto)</label>
+            <select id="f-proto" name="proto" class="form-control font-mono">
+              <option value="tcp">tcp</option>
+              <option value="udp">udp</option>
+              <option value="arp">arp</option>
+              <option value="ospf">ospf</option>
+              <option value="sctp">sctp</option>
+              <option value="unas">unas</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="f-service">Service (service)</label>
+            <select id="f-service" name="service" class="form-control font-mono">
+              <option value="-">- (None)</option>
+              <option value="http">http</option>
+              <option value="dns">dns</option>
+              <option value="ftp">ftp</option>
+              <option value="smtp">smtp</option>
+              <option value="ssh">ssh</option>
+              <option value="pop3">pop3</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="f-state">State</label>
+            <select id="f-state" name="state" class="form-control font-mono">
+              <option value="FIN">FIN</option>
+              <option value="INT">INT</option>
+              <option value="CON">CON</option>
+              <option value="REQ">REQ</option>
+              <option value="RST">RST</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="f-dur">Duration (s)</label>
+            <input type="number" id="f-dur" name="dur" step="0.00001" class="form-control font-mono" value="0.000011" />
+          </div>
+
+          <div class="form-group">
+            <label for="f-rate">Packet Rate (rate)</label>
+            <input type="number" id="f-rate" name="rate" step="1" class="form-control font-mono" value="90909" />
+          </div>
+
+          <div class="form-group">
+            <label for="f-sbytes">Source Bytes (sbytes)</label>
+            <input type="number" id="f-sbytes" name="sbytes" step="1" class="form-control font-mono" value="496" />
+          </div>
+
+          <div class="form-group">
+            <label for="f-dbytes">Dest Bytes (dbytes)</label>
+            <input type="number" id="f-dbytes" name="dbytes" step="1" class="form-control font-mono" value="0" />
+          </div>
+
+          <div class="form-group">
+            <label for="f-spkts">Source Pkts (spkts)</label>
+            <input type="number" id="f-spkts" name="spkts" step="1" class="form-control font-mono" value="2" />
+          </div>
+
+          <div class="form-group">
+            <label for="f-dpkts">Dest Pkts (dpkts)</label>
+            <input type="number" id="f-dpkts" name="dpkts" step="1" class="form-control font-mono" value="0" />
+          </div>
+
+          <div class="form-group">
+            <label for="f-sload">Source Load (sload)</label>
+            <input type="number" id="f-sload" name="sload" step="1000" class="form-control font-mono" value="180363632" />
+          </div>
+
+          <div class="form-group">
+            <label for="f-smean">Source Mean (smean)</label>
+            <input type="number" id="f-smean" name="smean" step="1" class="form-control font-mono" value="248" />
+          </div>
+
+          <div class="form-group">
+            <label for="f-ct_dst_sport_ltm">Conn Count (dst_sport)</label>
+            <input type="number" id="f-ct_dst_sport_ltm" name="ct_dst_sport_ltm" step="1" class="form-control font-mono" value="1" />
+          </div>
+        </form>
+
+        <div class="form-actions">
+          <button id="analyze-btn" class="btn btn-primary">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <span>Evaluate Flow with Hybrid Decision Engine</span>
+          </button>
+        </div>
+
+        <!-- Evaluation Verdict Banner -->
+        <div class="verdict-card" id="verdict-card">
+          <div class="verdict-top">
+            <div class="verdict-badge-wrap">
+              <span class="verdict-badge verdict-normal" id="verdict-decision-badge">NORMAL</span>
+              <span class="risk-badge risk-low" id="verdict-risk-badge">LOW RISK</span>
+            </div>
+            <div class="inference-timer font-mono" id="verdict-latency">Latency: 1.4 ms</div>
+          </div>
+
+          <div class="verdict-metrics-row">
+            <div class="v-metric">
+              <div class="v-metric-label">Supervised Class & Confidence</div>
+              <div class="v-metric-val font-mono" id="verdict-pred-cat">Normal (96.8%)</div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill fill-blue" id="verdict-conf-bar" style="width: 96.8%;"></div>
+              </div>
+            </div>
+
+            <div class="v-metric">
+              <div class="v-metric-label">Isolation Forest Anomaly Score</div>
+              <div class="v-metric-val font-mono" id="verdict-anomaly-score">0.4214 / 0.4782</div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill fill-green" id="verdict-anom-bar" style="width: 42.1%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="verdict-explanation">
+            <div class="exp-title">AI Decision Rationale:</div>
+            <p id="verdict-explanation-text" class="font-mono">
+              Traffic features reside safely within benign baseline distributions. No anomalous structural divergence detected.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN: SHAP Explainability & Decision Space -->
+      <section class="card glass explainability-panel">
+        <div class="card-header">
+          <div class="header-left">
+            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <h3>SHAP Feature Explainability</h3>
+          </div>
+          <span class="badge badge-purple">TreeExplainer</span>
+        </div>
+
+        <p class="panel-subtitle">Top features steering the AI model's classification decision for this flow:</p>
+
+        <!-- SHAP Waterfall / Bar Container -->
+        <div class="shap-container" id="shap-container">
+          <div class="shap-legend font-mono">
+            <span class="legend-item"><span class="legend-box box-red"></span> Increases Attack Risk</span>
+            <span class="legend-item"><span class="legend-box box-blue"></span> Suppresses Threat Score</span>
+          </div>
+
+          <div class="shap-bar-list" id="shap-bar-list">
+            <!-- Dynamically populated bars -->
+          </div>
+        </div>
+
+        <!-- 2D Hybrid Decision Space Map -->
+        <div class="decision-space-wrap">
+          <div class="space-header">
+            <h4>Hybrid Decision Space Crosshair</h4>
+            <span class="font-mono text-muted text-xs">Anomaly vs Confidence</span>
+          </div>
+          <div class="canvas-container">
+            <canvas id="decision-canvas" width="340" height="190"></canvas>
+          </div>
+          <div class="space-legend font-mono">
+            <span class="zone-tag zone-normal">Normal</span>
+            <span class="zone-tag zone-known">Known Attack</span>
+            <span class="zone-tag zone-unseen">Unseen Threat</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Bottom Section: Research Benchmarks & Breakthrough Results -->
+    <section class="card glass benchmarks-section">
+      <div class="card-header">
+        <div class="header-left">
+          <svg class="header-icon icon-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+          <h3>Controlled Unseen-Attack Research Benchmark (The Core Problem Solved)</h3>
+        </div>
+        <span class="badge badge-blue">UNSW-NB15 Benchmark</span>
+      </div>
+
+      <div class="benchmarks-grid">
+        <!-- Detection Rate Comparison Chart Card -->
+        <div class="benchmark-card">
+          <h4>Unseen Threat Detection Rates by Architecture</h4>
+          <p class="benchmark-desc">When deliberate attack categories are excluded from supervised training:</p>
+          
+          <div class="bar-benchmark-row">
+            <div class="bar-label font-mono">Supervised Model Alone</div>
+            <div class="bar-track">
+              <div class="bar-val-fill fill-red" style="width: 2%;">0.0%</div>
+            </div>
+            <span class="bar-result-text text-danger font-mono font-medium">Catastrophic Zero-Day Failure</span>
+          </div>
+
+          <div class="bar-benchmark-row">
+            <div class="bar-label font-mono">Isolation Forest Alone</div>
+            <div class="bar-track">
+              <div class="bar-val-fill fill-amber" style="width: 54.5%;">54.5%</div>
+            </div>
+            <span class="bar-result-text text-warning font-mono font-medium">Moderate (Elevated False Positive Rate)</span>
+          </div>
+
+          <div class="bar-benchmark-row">
+            <div class="bar-label font-mono">Sentinel-Hybrid Framework</div>
+            <div class="bar-track">
+              <div class="bar-val-fill fill-blue" style="width: 85.3%;">85.3% - 97.7%</div>
+            </div>
+            <span class="bar-result-text text-success font-mono font-bold">Optimal Generalization</span>
+          </div>
+        </div>
+
+        <!-- Comparative Metrics Table -->
+        <div class="benchmark-card">
+          <h4>Test Set Comparative Performance</h4>
+          <table class="benchmark-table font-mono">
+            <thead>
+              <tr>
+                <th>Model Architecture</th>
+                <th>Accuracy</th>
+                <th>Macro F1</th>
+                <th>Known Recall</th>
+                <th>Unseen Recall</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-bold">Multiclass Random Forest</td>
+                <td>75.4%</td>
+                <td>0.486</td>
+                <td>98.2%</td>
+                <td class="text-danger font-bold">0.0%</td>
+              </tr>
+              <tr>
+                <td class="font-bold">Isolation Forest Baseline</td>
+                <td>54.5%</td>
+                <td>0.412</td>
+                <td>54.5%</td>
+                <td class="text-warning font-bold">54.5%</td>
+              </tr>
+              <tr class="highlight-row">
+                <td class="font-bold text-blue">Sentinel Hybrid (Ours)</td>
+                <td class="text-blue font-bold">78.1%</td>
+                <td class="text-blue font-bold">0.684</td>
+                <td class="text-blue font-bold">98.2%</td>
+                <td class="text-success font-bold">85.3%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="toast font-mono"></div>
+
+  <!-- Scripts -->
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -65,21 +65,35 @@ Incoming Network Flow Data
   - `data/raw/UNSW_NB15_training-set.csv`
   - `data/raw/UNSW_NB15_testing-set.csv`
 
-## 5. Development Phases
-1. **Phase 1: Project Inspection & Setup** (Current)
-2. **Phase 2: Dataset Understanding & Auditing**
-3. **Phase 3: Reproducible Preprocessing Pipeline**
-4. **Phase 4: Exploratory Data Analysis (EDA)**
-5. **Phase 5: Baseline Supervised Classifier (Binary & Multiclass)**
-6. **Phase 6: Multiclass Supervised Classification**
-7. **Phase 7: Anomaly Detection Baseline**
-8. **Phase 8 & 9: Controlled Unseen-Attack Experiments**
-9. **Phase 10: Baseline Comparison (Supervised vs Anomaly vs Hybrid)**
-10. **Phase 11: Hybrid Decision Engine**
-11. **Phase 12: Explainability (SHAP)**
-12. **Phase 13: FastAPI Backend**
-13. **Phase 14: React Dashboard**
-14. **Phase 15: Evaluation & Documentation**
+## 5. Development Phases & Current Status
+1. [x] **Phase 1: Project Inspection & Setup**
+2. [x] **Phase 2: Dataset Understanding & Auditing** (`reports/dataset_audit.md`)
+3. [x] **Phase 3: Reproducible Preprocessing Pipeline** (`src/preprocessing/pipeline.py`)
+4. [x] **Phase 4: Exploratory Data Analysis (EDA)** (`src/data/eda.py`, `reports/eda_report.md`)
+5. [x] **Phase 5: Baseline Supervised Classifier** (`src/models/baseline_supervised.py`)
+6. [x] **Phase 6: Multiclass Supervised Classification** (`src/models/multiclass_supervised.py`)
+7. [x] **Phase 7: Anomaly Detection Baseline** (`src/anomaly/isolation_forest.py`)
+8. [x] **Phase 8 & 9: Controlled Unseen-Attack Experiments** (`src/evaluation/unseen_experiments.py`)
+9. [x] **Phase 10: Baseline Comparison (Supervised vs Anomaly vs Hybrid)** (`src/evaluation/baseline_comparison.py`)
+10. [x] **Phase 11: Hybrid Decision Engine** (`src/hybrid/decision_engine.py`)
+11. [x] **Phase 12: Explainability (SHAP)** (`src/explainability/explainer.py`)
+12. [x] **Phase 13: FastAPI Backend** (`src/api/main.py`)
+13. [x] **Phase 14: Interactive Light-Themed SOC Dashboard** (`src/api/static/`)
+14. [x] **Phase 15: Evaluation, Unit Tests & Documentation** (`tests/test_nids_system.py`)
+
+## 6. Running the System
+
+### Start the FastAPI Service & SOC Dashboard
+```bash
+python -m uvicorn src.api.main:app --host 127.0.0.1 --port 8000
+```
+- **Interactive SOC Dashboard:** [http://127.0.0.1:8000](http://127.0.0.1:8000) (Executive Light Theme)
+- **FastAPI Interactive Swagger Docs:** [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+### Run the Automated Test Suite
+```bash
+python -m unittest tests/test_nids_system.py -v
+```
 
 ## 6. Research Limitations
 - **Benchmark Specificity:** UNSW-NB15 reflects simulated network testbeds; feature distributions may differ in real enterprise environments.
