@@ -1,0 +1,70 @@
+{
+  "Worms": {
+    "holdout_category": "Worms",
+    "excluded_train_samples": 130,
+    "test_unseen_samples": 44,
+    "supervised_misclassified_as_normal": 0,
+    "supervised_misclassified_as_normal_pct": 0.0,
+    "supervised_predictions_breakdown": {
+      "Exploits": 34,
+      "Fuzzers": 6,
+      "DoS": 3,
+      "Shellcode": 1
+    },
+    "anomaly_detected_count_p90": 9,
+    "unseen_attack_detection_rate_p90": 20.45,
+    "anomaly_detected_count_p95": 6,
+    "unseen_attack_detection_rate_p95": 13.64,
+    "mean_supervised_confidence_unseen": 0.6996,
+    "mean_supervised_confidence_known": 0.8076,
+    "mean_anomaly_score_unseen": 0.4477,
+    "mean_anomaly_score_known": 0.4478
+  },
+  "Shellcode": {
+    "holdout_category": "Shellcode",
+    "excluded_train_samples": 1133,
+    "test_unseen_samples": 378,
+    "supervised_misclassified_as_normal": 6,
+    "supervised_misclassified_as_normal_pct": 1.59,
+    "supervised_predictions_breakdown": {
+      "Fuzzers": 271,
+      "Exploits": 53,
+      "DoS": 41,
+      "Normal": 6,
+      "Reconnaissance": 4,
+      "Backdoor": 2,
+      "Worms": 1
+    },
+    "anomaly_detected_count_p90": 13,
+    "unseen_attack_detection_rate_p90": 3.44,
+    "anomaly_detected_count_p95": 9,
+    "unseen_attack_detection_rate_p95": 2.38,
+    "mean_supervised_confidence_unseen": 0.5983,
+    "mean_supervised_confidence_known": 0.8142,
+    "mean_anomaly_score_unseen": 0.404,
+    "mean_anomaly_score_known": 0.448
+  },
+  "Backdoor": {
+    "holdout_category": "Backdoor",
+    "excluded_train_samples": 1746,
+    "test_unseen_samples": 583,
+    "supervised_misclassified_as_normal": 0,
+    "supervised_misclassified_as_normal_pct": 0.0,
+    "supervised_predictions_breakdown": {
+      "DoS": 425,
+      "Analysis": 108,
+      "Exploits": 38,
+      "Shellcode": 9,
+      "Fuzzers": 2,
+      "Reconnaissance": 1
+    },
+    "anomaly_detected_count_p90": 200,
+    "unseen_attack_detection_rate_p90": 34.31,
+    "anomaly_detected_count_p95": 53,
+    "unseen_attack_detection_rate_p95": 9.09,
+    "mean_supervised_confidence_unseen": 0.4024,
+    "mean_supervised_confidence_known": 0.8178,
+    "mean_anomaly_score_unseen": 0.4662,
+    "mean_anomaly_score_known": 0.4476
+  }
+}

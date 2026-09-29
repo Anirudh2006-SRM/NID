@@ -1,0 +1,331 @@
+{
+  "dataset_name": "UNSW-NB15",
+  "training_set": {
+    "split_name": "training_set",
+    "total_rows": 175341,
+    "total_columns": 36,
+    "columns": [
+      "dur",
+      "proto",
+      "service",
+      "state",
+      "spkts",
+      "dpkts",
+      "sbytes",
+      "dbytes",
+      "rate",
+      "sload",
+      "dload",
+      "sloss",
+      "dloss",
+      "sinpkt",
+      "dinpkt",
+      "sjit",
+      "djit",
+      "swin",
+      "stcpb",
+      "dtcpb",
+      "dwin",
+      "tcprtt",
+      "synack",
+      "ackdat",
+      "smean",
+      "dmean",
+      "trans_depth",
+      "response_body_len",
+      "ct_src_dport_ltm",
+      "ct_dst_sport_ltm",
+      "is_ftp_login",
+      "ct_ftp_cmd",
+      "ct_flw_http_mthd",
+      "is_sm_ips_ports",
+      "attack_cat",
+      "label"
+    ],
+    "numeric_column_count": 32,
+    "numeric_columns": [
+      "dur",
+      "spkts",
+      "dpkts",
+      "sbytes",
+      "dbytes",
+      "rate",
+      "sload",
+      "dload",
+      "sloss",
+      "dloss",
+      "sinpkt",
+      "dinpkt",
+      "sjit",
+      "djit",
+      "swin",
+      "stcpb",
+      "dtcpb",
+      "dwin",
+      "tcprtt",
+      "synack",
+      "ackdat",
+      "smean",
+      "dmean",
+      "trans_depth",
+      "response_body_len",
+      "ct_src_dport_ltm",
+      "ct_dst_sport_ltm",
+      "is_ftp_login",
+      "ct_ftp_cmd",
+      "ct_flw_http_mthd",
+      "is_sm_ips_ports",
+      "label"
+    ],
+    "categorical_column_count": 4,
+    "categorical_columns": [
+      "proto",
+      "service",
+      "state",
+      "attack_cat"
+    ],
+    "missing_values_by_column": {},
+    "has_missing": false,
+    "infinite_values_by_column": {},
+    "has_infinite": false,
+    "exact_duplicates": 78519,
+    "duplicates_excluding_id": 78519,
+    "binary_label_distribution": {
+      "1": {
+        "count": 119341,
+        "percentage": 68.06
+      },
+      "0": {
+        "count": 56000,
+        "percentage": 31.94
+      }
+    },
+    "attack_category_distribution": {
+      "Normal": {
+        "count": 56000,
+        "percentage": 31.9378
+      },
+      "Generic": {
+        "count": 40000,
+        "percentage": 22.8127
+      },
+      "Exploits": {
+        "count": 33393,
+        "percentage": 19.0446
+      },
+      "Fuzzers": {
+        "count": 18184,
+        "percentage": 10.3706
+      },
+      "DoS": {
+        "count": 12264,
+        "percentage": 6.9944
+      },
+      "Reconnaissance": {
+        "count": 10491,
+        "percentage": 5.9832
+      },
+      "Analysis": {
+        "count": 2000,
+        "percentage": 1.1406
+      },
+      "Backdoor": {
+        "count": 1746,
+        "percentage": 0.9958
+      },
+      "Shellcode": {
+        "count": 1133,
+        "percentage": 0.6462
+      },
+      "Worms": {
+        "count": 130,
+        "percentage": 0.0741
+      }
+    }
+  },
+  "testing_set": {
+    "split_name": "testing_set",
+    "total_rows": 82332,
+    "total_columns": 36,
+    "columns": [
+      "dur",
+      "proto",
+      "service",
+      "state",
+      "spkts",
+      "dpkts",
+      "sbytes",
+      "dbytes",
+      "rate",
+      "sload",
+      "dload",
+      "sloss",
+      "dloss",
+      "sinpkt",
+      "dinpkt",
+      "sjit",
+      "djit",
+      "swin",
+      "stcpb",
+      "dtcpb",
+      "dwin",
+      "tcprtt",
+      "synack",
+      "ackdat",
+      "smean",
+      "dmean",
+      "trans_depth",
+      "response_body_len",
+      "ct_src_dport_ltm",
+      "ct_dst_sport_ltm",
+      "is_ftp_login",
+      "ct_ftp_cmd",
+      "ct_flw_http_mthd",
+      "is_sm_ips_ports",
+      "attack_cat",
+      "label"
+    ],
+    "numeric_column_count": 32,
+    "numeric_columns": [
+      "dur",
+      "spkts",
+      "dpkts",
+      "sbytes",
+      "dbytes",
+      "rate",
+      "sload",
+      "dload",
+      "sloss",
+      "dloss",
+      "sinpkt",
+      "dinpkt",
+      "sjit",
+      "djit",
+      "swin",
+      "stcpb",
+      "dtcpb",
+      "dwin",
+      "tcprtt",
+      "synack",
+      "ackdat",
+      "smean",
+      "dmean",
+      "trans_depth",
+      "response_body_len",
+      "ct_src_dport_ltm",
+      "ct_dst_sport_ltm",
+      "is_ftp_login",
+      "ct_ftp_cmd",
+      "ct_flw_http_mthd",
+      "is_sm_ips_ports",
+      "label"
+    ],
+    "categorical_column_count": 4,
+    "categorical_columns": [
+      "proto",
+      "service",
+      "state",
+      "attack_cat"
+    ],
+    "missing_values_by_column": {},
+    "has_missing": false,
+    "infinite_values_by_column": {},
+    "has_infinite": false,
+    "exact_duplicates": 32361,
+    "duplicates_excluding_id": 32361,
+    "binary_label_distribution": {
+      "1": {
+        "count": 45332,
+        "percentage": 55.06
+      },
+      "0": {
+        "count": 37000,
+        "percentage": 44.94
+      }
+    },
+    "attack_category_distribution": {
+      "Normal": {
+        "count": 37000,
+        "percentage": 44.94
+      },
+      "Generic": {
+        "count": 18871,
+        "percentage": 22.9206
+      },
+      "Exploits": {
+        "count": 11132,
+        "percentage": 13.5209
+      },
+      "Fuzzers": {
+        "count": 6062,
+        "percentage": 7.3629
+      },
+      "DoS": {
+        "count": 4089,
+        "percentage": 4.9665
+      },
+      "Reconnaissance": {
+        "count": 3496,
+        "percentage": 4.2462
+      },
+      "Analysis": {
+        "count": 677,
+        "percentage": 0.8223
+      },
+      "Backdoor": {
+        "count": 583,
+        "percentage": 0.7081
+      },
+      "Shellcode": {
+        "count": 378,
+        "percentage": 0.4591
+      },
+      "Worms": {
+        "count": 44,
+        "percentage": 0.0534
+      }
+    }
+  },
+  "cross_split_validation": {
+    "columns_identical": true,
+    "columns_in_train_not_test": [],
+    "columns_in_test_not_train": [],
+    "attack_categories_in_train": [
+      "Analysis",
+      "Backdoor",
+      "DoS",
+      "Exploits",
+      "Fuzzers",
+      "Generic",
+      "Normal",
+      "Reconnaissance",
+      "Shellcode",
+      "Worms"
+    ],
+    "attack_categories_in_test": [
+      "Analysis",
+      "Backdoor",
+      "DoS",
+      "Exploits",
+      "Fuzzers",
+      "Generic",
+      "Normal",
+      "Reconnaissance",
+      "Shellcode",
+      "Worms"
+    ],
+    "attack_categories_overlap": [
+      "Analysis",
+      "Backdoor",
+      "DoS",
+      "Exploits",
+      "Fuzzers",
+      "Generic",
+      "Normal",
+      "Reconnaissance",
+      "Shellcode",
+      "Worms"
+    ],
+    "potential_leakage_identifiers": []
+  }
+}

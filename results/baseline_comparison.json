@@ -1,0 +1,38 @@
+{
+  "evaluation_flows": 82332,
+  "system_a_supervised": {
+    "name": "Supervised Classifier Only",
+    "model": "RandomForestClassifier",
+    "threat_f1": 0.8584452242905096,
+    "threat_precision": 0.7560639655983337,
+    "threat_recall": 0.9928968499073502,
+    "fpr": 0.3924864864864865,
+    "unseen_identification_capacity": "None (Forced into known classes)",
+    "latency_ms": 0.010224860321802726
+  },
+  "system_b_anomaly": {
+    "name": "Anomaly Detector Only",
+    "model": "IsolationForest",
+    "threat_f1": 0.6356319938261397,
+    "threat_precision": 0.8468713278495887,
+    "threat_recall": 0.508735551045619,
+    "fpr": 0.1127027027027027,
+    "unseen_identification_capacity": "Partial (Detects deviation from benign without categorization)",
+    "latency_ms": 0.01004452582227168
+  },
+  "system_c_hybrid": {
+    "name": "Hybrid Decision Engine",
+    "architecture": "Supervised Confidence + Anomaly Threshold Gating",
+    "threat_f1": 0.7606960762580359,
+    "threat_precision": 0.7644582070932098,
+    "threat_recall": 0.7569707932586253,
+    "fpr": 0.28575675675675677,
+    "unseen_identification_capacity": "Explicit (Routes uncertain/deviant traffic to UNSEEN / ANOMALOUS)",
+    "latency_ms": 0.019803515037138748,
+    "decision_breakdown": {
+      "KNOWN ATTACK": 39031,
+      "NORMAL": 37444,
+      "UNSEEN / ANOMALOUS": 5857
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "model": "RandomForestClassifier",
+  "task": "Binary Classification (Normal vs Attack)",
+  "hyperparameters": {
+    "n_estimators": 100,
+    "max_depth": 20,
+    "class_weight": "balanced",
+    "random_state": 42
+  },
+  "metrics": {
+    "accuracy": 0.9065855317495021,
+    "macro_precision": 0.9093327459517198,
+    "macro_recall": 0.9023862971327455,
+    "macro_f1": 0.9049081042851144,
+    "weighted_f1": 0.9061862319150438,
+    "roc_auc": 0.9799834258837501,
+    "pr_auc": 0.9853335234483286,
+    "fpr": 0.13910810810810811,
+    "fnr": 0.05611929762640078,
+    "confusion_matrix": {
+      "true_negative": 31853,
+      "false_positive": 5147,
+      "false_negative": 2544,
+      "true_positive": 42788
+    },
+    "training_time_sec": 12.283,
+    "inference_time_sec": 0.667,
+    "ms_per_flow": 0.0081
+  },
+  "top_15_features": [
+    {
+      "feature": "num_rate",
+      "importance": 0.0907
+    },
+    {
+      "feature": "num_dload",
+      "importance": 0.0843
+    },
+    {
+      "feature": "num_sload",
+      "importance": 0.0791
+    },
+    {
+      "feature": "num_tcprtt",
+      "importance": 0.0525
+    },
+    {
+      "feature": "num_dinpkt",
+      "importance": 0.051
+    },
+    {
+      "feature": "num_sbytes",
+      "importance": 0.0492
+    },
+    {
+      "feature": "num_dpkts",
+      "importance": 0.0472
+    },
+    {
+      "feature": "num_dbytes",
+      "importance": 0.0471
+    },
+    {
+      "feature": "num_synack",
+      "importance": 0.047
+    },
+    {
+      "feature": "num_dmean",
+      "importance": 0.0465
+    },
+    {
+      "feature": "num_smean",
+      "importance": 0.0448
+    },
+    {
+      "feature": "num_ackdat",
+      "importance": 0.0445
+    },
+    {
+      "feature": "num_dur",
+      "importance": 0.0429
+    },
+    {
+      "feature": "num_sinpkt",
+      "importance": 0.0334
+    },
+    {
+      "feature": "num_sjit",
+      "importance": 0.0298
+    }
+  ]
+}

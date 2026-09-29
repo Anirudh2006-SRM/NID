@@ -1,0 +1,109 @@
+{
+  "model": "IsolationForest",
+  "reference_training": "Normal Flows (56,000 samples)",
+  "thresholds": {
+    "p90": 0.4782085165579281,
+    "p95": 0.500855576955964
+  },
+  "metrics": {
+    "roc_auc": 0.7861768630118692,
+    "pr_auc": 0.8182441147038181,
+    "fpr_p90": 0.1127,
+    "fpr_p95": 0.0578,
+    "training_time_sec": 0.68,
+    "inference_time_sec": 0.832,
+    "ms_per_flow": 0.0101
+  },
+  "per_category_performance": {
+    "Normal": {
+      "total_samples": 37000,
+      "mean_anomaly_score": 0.41214,
+      "median_anomaly_score": 0.40363,
+      "detected_p90": 4170,
+      "detection_rate_p90": 0.1127,
+      "detected_p95": 2140,
+      "detection_rate_p95": 0.0578
+    },
+    "Generic": {
+      "total_samples": 18871,
+      "mean_anomaly_score": 0.53051,
+      "median_anomaly_score": 0.54112,
+      "detected_p90": 18044,
+      "detection_rate_p90": 0.9562,
+      "detected_p95": 17455,
+      "detection_rate_p95": 0.925
+    },
+    "Exploits": {
+      "total_samples": 11132,
+      "mean_anomaly_score": 0.44402,
+      "median_anomaly_score": 0.44687,
+      "detected_p90": 2197,
+      "detection_rate_p90": 0.1974,
+      "detected_p95": 952,
+      "detection_rate_p95": 0.0855
+    },
+    "Fuzzers": {
+      "total_samples": 6062,
+      "mean_anomaly_score": 0.42619,
+      "median_anomaly_score": 0.4305,
+      "detected_p90": 1230,
+      "detection_rate_p90": 0.2029,
+      "detected_p95": 522,
+      "detection_rate_p95": 0.0861
+    },
+    "DoS": {
+      "total_samples": 4089,
+      "mean_anomaly_score": 0.4584,
+      "median_anomaly_score": 0.45989,
+      "detected_p90": 995,
+      "detection_rate_p90": 0.2433,
+      "detected_p95": 314,
+      "detection_rate_p95": 0.0768
+    },
+    "Reconnaissance": {
+      "total_samples": 3496,
+      "mean_anomaly_score": 0.41351,
+      "median_anomaly_score": 0.43256,
+      "detected_p90": 156,
+      "detection_rate_p90": 0.0446,
+      "detected_p95": 33,
+      "detection_rate_p95": 0.0094
+    },
+    "Analysis": {
+      "total_samples": 677,
+      "mean_anomaly_score": 0.46454,
+      "median_anomaly_score": 0.46864,
+      "detected_p90": 218,
+      "detection_rate_p90": 0.322,
+      "detected_p95": 47,
+      "detection_rate_p95": 0.0694
+    },
+    "Backdoor": {
+      "total_samples": 583,
+      "mean_anomaly_score": 0.46623,
+      "median_anomaly_score": 0.46954,
+      "detected_p90": 200,
+      "detection_rate_p90": 0.3431,
+      "detected_p95": 53,
+      "detection_rate_p95": 0.0909
+    },
+    "Shellcode": {
+      "total_samples": 378,
+      "mean_anomaly_score": 0.40402,
+      "median_anomaly_score": 0.41345,
+      "detected_p90": 13,
+      "detection_rate_p90": 0.0344,
+      "detected_p95": 9,
+      "detection_rate_p95": 0.0238
+    },
+    "Worms": {
+      "total_samples": 44,
+      "mean_anomaly_score": 0.44775,
+      "median_anomaly_score": 0.4382,
+      "detected_p90": 9,
+      "detection_rate_p90": 0.2045,
+      "detected_p95": 6,
+      "detection_rate_p95": 0.1364
+    }
+  }
+}

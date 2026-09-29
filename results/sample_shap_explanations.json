@@ -1,0 +1,146 @@
+{
+  "Normal": {
+    "predicted_class": "Shellcode",
+    "class_probability": 0.9682,
+    "top_features": [
+      {
+        "feature": "cat_proto_udp",
+        "shap_value": 0.16136,
+        "feature_value": 1.0,
+        "impact": "increases risk / promotes class"
+      },
+      {
+        "feature": "num_sbytes",
+        "shap_value": 0.11244,
+        "feature_value": 0.0506,
+        "impact": "increases risk / promotes class"
+      },
+      {
+        "feature": "num_smean",
+        "shap_value": 0.10958,
+        "feature_value": 4.0698,
+        "impact": "increases risk / promotes class"
+      },
+      {
+        "feature": "num_ct_src_dport_ltm",
+        "shap_value": 0.06754,
+        "feature_value": 0.0,
+        "impact": "increases risk / promotes class"
+      },
+      {
+        "feature": "num_ct_dst_sport_ltm",
+        "shap_value": 0.04451,
+        "feature_value": 0.0,
+        "impact": "increases risk / promotes class"
+      }
+    ]
+  },
+  "Exploits": {
+    "predicted_class": "Backdoor",
+    "class_probability": 0.2723,
+    "top_features": [
+      {
+        "feature": "cat_proto_udp",
+        "shap_value": 0.06893,
+        "feature_value": 0.0,
+        "impact": "increases risk / promotes class"
+      },
+      {
+        "feature": "cat_proto_sctp",
+        "shap_value": 0.02002,
+        "feature_value": 1.0,
+        "impact": "increases risk / promotes class"
+      },
+      {
+        "feature": "num_ct_src_dport_ltm",
+        "shap_value": 0.0184,
+        "feature_value": 0.0,
+        "impact": "increases risk / promotes class"
+      },
+      {
+        "feature": "num_ct_dst_sport_ltm",
+        "shap_value": 0.01446,
+        "feature_value": 0.0,
+        "impact": "increases risk / promotes class"
+      },
+      {
+        "feature": "num_rate",
+        "shap_value": -0.01136,
+        "feature_value": 0.8633,
+        "impact": "decreases risk / suppresses class"
+      }
+    ]
+  },
+  "DoS": {
+    "predicted_class": "Backdoor",
+    "class_probability": 0.4986,
+    "top_features": [
+      {
+        "feature": "cat_proto_udp",
+        "shap_value": 0.05052,
+        "feature_value": 0.0,
+        "impact": "increases risk / promotes class"
+      },
+      {
+        "feature": "num_sjit",
+        "shap_value": 0.03443,
+        "feature_value": 0.0208,
+        "impact": "increases risk / promotes class"
+      },
+      {
+        "feature": "num_sload",
+        "shap_value": 0.02385,
+        "feature_value": -0.0098,
+        "impact": "increases risk / promotes class"
+      },
+      {
+        "feature": "num_sbytes",
+        "shap_value": 0.02235,
+        "feature_value": 0.6518,
+        "impact": "increases risk / promotes class"
+      },
+      {
+        "feature": "num_sinpkt",
+        "shap_value": 0.01927,
+        "feature_value": 0.8748,
+        "impact": "increases risk / promotes class"
+      }
+    ]
+  },
+  "Generic": {
+    "predicted_class": "Generic",
+    "class_probability": 1.0,
+    "top_features": [
+      {
+        "feature": "cat_service_dns",
+        "shap_value": 0.18143,
+        "feature_value": 1.0,
+        "impact": "increases risk / promotes class"
+      },
+      {
+        "feature": "num_sbytes",
+        "shap_value": 0.12636,
+        "feature_value": -0.2423,
+        "impact": "increases risk / promotes class"
+      },
+      {
+        "feature": "num_ct_src_dport_ltm",
+        "shap_value": 0.10421,
+        "feature_value": 3.75,
+        "impact": "increases risk / promotes class"
+      },
+      {
+        "feature": "num_ct_dst_sport_ltm",
+        "shap_value": 0.10253,
+        "feature_value": 3.5,
+        "impact": "increases risk / promotes class"
+      },
+      {
+        "feature": "cat_service_-",
+        "shap_value": 0.08761,
+        "feature_value": 0.0,
+        "impact": "increases risk / promotes class"
+      }
+    ]
+  }
+}
